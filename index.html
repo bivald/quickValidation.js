@@ -55,8 +55,18 @@
 				</form>
 				<script type="text/javascript">
 					// debug mode is on for demo mode purposes
-					$('form').quickValidate({'debug':true});
+					$('form').quickValidate({
+						successCallback: done,
+						successCallbackScope: this,
+					});
 					
+					function done(form) {
+						console.log(this)
+						console.log("done")
+						console.log(form)
+						return false;
+					}
+
 					// ignore everything below, just for the demo page
 					
 					$('.close').click(function(e) {

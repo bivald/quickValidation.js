@@ -15,7 +15,9 @@
 			errorExpression: "$name is not valid",
 			notificationClass: ".notification",
 			errorClass: ".error",
-			debug : false
+			debug : false,
+			successCallback: false,
+			successCallbackScope: false,
 		}
 		
 		var options = $.extend(defaults, options);
@@ -202,6 +204,8 @@
 					$(notification).find(o.errorClass).html("You have successfully validated a form, tell your friends.");
 					$(notification).show();
 					return false;
+				}else if(o.successCallback) {
+					return o.successCallback.call( (o.successCallbackScope ? o.successCallbackScope:this), obj )
 				}
 				return true;
 			});
